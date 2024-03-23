@@ -2,8 +2,14 @@ package org.example;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.params.provider.Arguments.*;
 
 /**
  * • 요구사항
@@ -13,17 +19,21 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * • MVC패턴(Model-View-Controller) 기반으로 구현한다.
  */
 public class CalculatorTest {
-    @Test
+    @ParameterizedTest
+    @MethodSource("formulaAndResult")
     @DisplayName("덧셈 연산을 수행한다.")
-    void additionTest() {
-        int result = Calculator.calculator(1, "+", 2);
-        assertThat(result).isEqualTo(3);
+    void calculatorTest(int operand1, String operator, int operand2, int result) {
+        int calculatorResult = Calculator.calculator(operand1, operator, operand2);
+        assertThat(calculatorResult).isEqualTo(result);
     }
-    @Test
-    @DisplayName("뺄셈 연산을 수행한다.")
-    void subtractionTest() {
-        int result = Calculator.calculator(1, "-", 2);
-        assertThat(result).isEqualTo(-1);
+
+    static private Stream<Arguments> formulaAndResult() {
+        return Stream.of(
+                arguments(1, "+", 2, 3),
+                arguments(1, "-", 2, -1),
+                arguments(1, "*", 2, 2),
+                arguments(6, "/", 2, 3)
+        );
     }
 
 }
