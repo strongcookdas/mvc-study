@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.calculator.PositiveNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +25,7 @@ public class CalculatorTest {
     @MethodSource("formulaAndResult")
     @DisplayName("덧셈 연산을 수행한다.")
     void calculatorTest(int operand1, String operator, int operand2, int result) {
-        int calculatorResult = Calculator.calculator(operand1, operator, operand2);
+        int calculatorResult = Calculator.calculator(new PositiveNumber(operand1), operator, new PositiveNumber(operand2));
         assertThat(calculatorResult).isEqualTo(result);
     }
 
@@ -35,13 +36,5 @@ public class CalculatorTest {
                 arguments(1, "*", 2, 2),
                 arguments(6, "/", 2, 3)
         );
-    }
-
-    @Test
-    @DisplayName("나눗셈에서  0을 나누는 경우 IllegalArgument 예외를 발생시킨다.")
-    void calculateExceptionTest() {
-        assertThatCode(() -> Calculator.calculator(10, "/", 0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("0으로는 나눌 수 없습니다.");
     }
 }
