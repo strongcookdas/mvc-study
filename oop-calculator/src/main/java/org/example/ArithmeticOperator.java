@@ -2,8 +2,7 @@ package org.example;
 
 import java.util.Arrays;
 
-public enum
-ArithmeticOperator {
+public enum ArithmeticOperator {
     ADDITION("+") {
         @Override
         public int arithmeticCalculator(int operand1, int operand2) {
