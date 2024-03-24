@@ -3,27 +3,16 @@ package org.example;
 import java.util.List;
 
 public class GradeCalculator {
-    private final List<Course> courses;
-
+    private final Courses courses;
+    //일급 콜렉션
+    // 리스트 형태로 된 정보를 인스턴스 변수로 가지는 클래스이다.
     public GradeCalculator(List<Course> courses) {
-        this.courses = courses;
+        this.courses = new Courses(courses);
     }
 
-    /*
-• 요구사항
-• 평균학점 계산 방법 = (학점수×교과목 평점)의 합계/수강신청 총학점 수
-• MVC패턴(Model-View-Controller) 기반으로 구현한다.
-• 일급 컬렉션 사용
- */
     public double calculate() {
-        double multipliedCreditAndCourseGrads = 0;
-        for (Course course : courses) {
-            multipliedCreditAndCourseGrads += course.getCredit() * course.getGradeToNumber();
-        }
-        int totalCompletedCredit = courses.stream()
-                .mapToInt(Course::getCredit)
-                .sum();
-
+        double multipliedCreditAndCourseGrads = courses.multiplyCreditAndCourseGrade();
+        int totalCompletedCredit = courses.calculateTotalCompletedCredit();
         return multipliedCreditAndCourseGrads / totalCompletedCredit;
     }
 }
