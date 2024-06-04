@@ -24,7 +24,7 @@ public enum ArithmeticOperator {
         @Override
         public int calculate(final int operand1, final int operand2) {
             if (operand2 == 0) {
-                throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+                throw new IllegalArgumentException("It cannot be divided by 0.");
             }
             return operand1 / operand2;
         }
@@ -42,7 +42,7 @@ public enum ArithmeticOperator {
         ArithmeticOperator selectedArithmeticOperator = Arrays.stream(ArithmeticOperator.values())
                 .filter(v -> v.operator.equals(operator))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("올바른 사칙연산이 아닙니다."));
+                .orElseThrow(() -> new IllegalArgumentException("This is not a correct arithmetic operation."));
 
         return selectedArithmeticOperator.calculate(operand1, operand2);
     }
