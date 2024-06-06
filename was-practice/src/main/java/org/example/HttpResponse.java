@@ -29,7 +29,7 @@ public class HttpResponse {
     public void responseBody(byte[] body) {
         try {
             dos.write(body, 0, body.length);
-            dos.flush();
+            dos.flush(); // 소켓 연결 통로로 전송
         } catch (IOException e) {
             logger.error(e.getMessage());
         }

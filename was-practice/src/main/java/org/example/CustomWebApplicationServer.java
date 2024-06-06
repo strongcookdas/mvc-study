@@ -9,7 +9,6 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 public class CustomWebApplicationServer {
     private final int port;
@@ -41,21 +40,23 @@ public class CustomWebApplicationServer {
                     BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                     DataOutputStream dos = new DataOutputStream(out);
 
+                    //HTTP Request 중 맨 윗 라인을 HttpRequest 생성자로 넘김 (메서드, 패스, 쿼리스트링 정보가 담겨있다.)
                     HttpRequest httpRequest = new HttpRequest(br);
 
+                    //GET 메서드이고, /calculator 패스를 가졌다면 로직 수행
                     if (httpRequest.isGetRequest() && httpRequest.matchPath("/calculator")) {
-                        QueryStrings queryStrings = httpRequest.getQueryStrings();
+                        QueryStrings queryStrings = httpRequest.getQueryStrings(); // 쿼리스트링 리턴받음
 
                         int operand1 = Integer.parseInt(queryStrings.getValue("operand1"));
                         String operator = queryStrings.getValue("operator");
                         int operand2 = Integer.parseInt(queryStrings.getValue("operand2"));
 
-                        int result = Calculator.calculate(new PositiveNumber(operand1), operator, new PositiveNumber(operand2));
-                        byte[] body = String.valueOf(result).getBytes();
+                        int result = Calculator.calculate(new PositiveNumber(operand1), operator, new PositiveNumber(operand2)); // 계산 수행
+                        byte[] body = String.valueOf(result).getBytes(); // 결과 바이트로 변환
 
-                        HttpResponse response = new HttpResponse(dos);
-                        response.response200Header("application/json",body.length);
-                        response.responseBody(body);
+                        HttpResponse response = new HttpResponse(dos); // 응답 보낼 경로 설정 및 응답 메세지 설정
+                        response.response200Header("application/json", body.length); // 응답 형식 설정
+                        response.responseBody(body); // 연산 결과 바디에 추가
                     }
                 }
             }

@@ -23,18 +23,19 @@ public class RequestLine {
         String[] urlPathTokens = tokens[1].split("\\?");
         this.urlPath = urlPathTokens[0];
         if (urlPathTokens.length == 2) {
+            // 쿼리스트링 파싱은 일급 컬렉션에게 맡김
             this.queryString = new QueryStrings(urlPathTokens[1]);
         }
     }
-    public boolean isGetRequest() {
+    public boolean isGetRequest() {// GET 메서드 확인
         return "GET".equals(this.method);
     }
 
-    public boolean matchPath(String path) {
+    public boolean matchPath(String path) {//패스 매칭
         return urlPath.equals(path);
     }
 
-    public QueryStrings getQueryStrings() {
+    public QueryStrings getQueryStrings() {//쿼리 스트링 반환
         return this.queryString;
     }
     @Override
