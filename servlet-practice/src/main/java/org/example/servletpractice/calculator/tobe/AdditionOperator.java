@@ -1,4 +1,4 @@
-package org.example.calculator.tobe;
+package org.example.servletpractice.calculator.tobe;
 
 
 import org.example.calculator.domain.PositiveNumber;

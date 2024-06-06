@@ -1,4 +1,4 @@
-package org.example.calculator.domain;
+package org.example.servletpractice.calculator.domain;
 
 import java.util.Arrays;
 
