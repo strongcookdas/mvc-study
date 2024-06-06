@@ -1,10 +1,9 @@
 package org.example.servletpractice.calculator.domain;
 
 
-import org.example.calculator.tobe.AdditionOperator;
-import org.example.calculator.tobe.ArithmeticOperator;
-import org.example.calculator.tobe.DivisionOperator;
-import org.example.calculator.tobe.SubtractionOperator;
+import org.example.servletpractice.calculator.tobe.AdditionOperator;
+import org.example.servletpractice.calculator.tobe.ArithmeticOperator;
+import org.example.servletpractice.calculator.tobe.DivisionOperator;
 
 import java.util.List;
 

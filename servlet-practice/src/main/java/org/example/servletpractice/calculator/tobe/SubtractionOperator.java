@@ -1,6 +1,6 @@
 package org.example.servletpractice.calculator.tobe;
 
-import org.example.calculator.domain.PositiveNumber;
+import org.example.servletpractice.calculator.domain.PositiveNumber;
 
 public class SubtractionOperator implements ArithmeticOperator{
     @Override

@@ -2,7 +2,7 @@ package org.example.servletpractice.calculator.domain;
 
 import java.util.Arrays;
 
-public enum ArithmeticOperator {
+public enum EnumArithmeticOperator {
     ADDITION("+") {
         @Override
         public int calculate(final int operand1, final int operand2) {
@@ -32,14 +32,14 @@ public enum ArithmeticOperator {
 
     private final String operator;
 
-    ArithmeticOperator(String operator) {
+    EnumArithmeticOperator(String operator) {
         this.operator = operator;
     }
 
     public abstract int calculate(final int operand1, final int operand2);
 
     public static int calculate(final int operand1, final String operator, final int operand2) {
-        ArithmeticOperator selectedArithmeticOperator = Arrays.stream(ArithmeticOperator.values())
+        EnumArithmeticOperator selectedArithmeticOperator = Arrays.stream(EnumArithmeticOperator.values())
                 .filter(v -> v.operator.equals(operator))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("This is not a correct arithmetic operation."));
