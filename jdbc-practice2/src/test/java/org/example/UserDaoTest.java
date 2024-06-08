@@ -24,7 +24,7 @@ public class UserDaoTest {
         //Data Access Object db 작업시 dao에게 유임
         UserDao userDao = new UserDao();
         userDao.create(new User("jdbcId", "password", "name", "email"));
-        User user = userDao.findUserId("hong");
+        User user = userDao.findUserId("jdbcId");
         assertThat(user).isEqualTo(new User("jdbcId", "password", "name","email"));
     }
 }
